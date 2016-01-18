@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="redimlive.route" path="/redimlive/{type}/{id}/{offset}/{width}/{height}">
+        <default key="_controller">Redimlive\Controller\Redimlive::redimlive</default>
+        <requirement key="type">product|category|content|folder|brand</requirement>
+        <requirement key="id">\d+</requirement>
+        <requirement key="offset">\d+</requirement>
+        <requirement key="width">\d+</requirement>
+        <requirement key="height">\d+</requirement>
+    </route>
+
+    <route id="redimlive.route" path="/redimlive/{type}/{id}/{offset}/{width}/{height}/{resizeMode}">
+        <default key="_controller">Redimlive\Controller\Redimlive::redimlive</default>
+        <requirement key="type">product|category|content|folder|brand</requirement>
+        <requirement key="id">\d+</requirement>
+        <requirement key="offset">\d+</requirement>
+        <requirement key="width">\d+</requirement>
+        <requirement key="height">\d+</requirement>
+        <requirement key="resizeMode">crop|borders|none</requirement>
+    </route>
+</routes>
