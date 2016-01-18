@@ -13,6 +13,7 @@
  */
 namespace Redimlive\Controller;
 
+use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Symfony\Component\HttpFoundation\Response;
 use Thelia\Controller\Front\BaseFrontController;
@@ -39,7 +40,13 @@ class Redimlive extends BaseFrontController
         $method = new \ReflectionMethod($queryClass, $filterMethod);
         $method->invoke($search, $id);
 
-        if (null !== $image = $search->offset(max(0, $offset - 1))->limit(1)->findOne()) {
+        $search
+            ->orderByPosition(Criteria::ASC)
+            ->offset(max(0, $offset - 1))
+            ->limit(1)
+        ;
+
+        if (null !== $image = $search->findOne()) {
             switch ($resizeMode) {
                 case 'crop':
                     $resizeMode = \Thelia\Action\Image::EXACT_RATIO_WITH_CROP;
